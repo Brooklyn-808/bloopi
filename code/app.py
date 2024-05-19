@@ -15,9 +15,9 @@ def contact():
     st.write("- GitHub: [Your GitHub Profile](https://github.com/)")
 
 st.sidebar.write("Navigation")
-st.sidebar.page_link("app.py")
-st.sidebar.page_link("pages/about.py")
-st.sidebar.page_link("pages/contact.py")
+st.sidebar.page_link("app.py", "Homepage")
+st.sidebar.page_link("pages/about.py", "About Me")
+st.sidebar.page_link("pages/contact.py", "Contact")
 st.title("Welcome to My Portfolio!")
 st.write("This is the home page of my portfolio website.")
 st.write("Feel free to browse around and learn more about me.")
