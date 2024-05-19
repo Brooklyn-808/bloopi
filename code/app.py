@@ -39,6 +39,7 @@ def render_game():
                 game_state['message'] = rooms[game_state['current_room']]['description']
             else:
                 game_state['message'] = 'Invalid choice!'
+    st.write(game_state['message'])
 
 def main():
     st.title("Text Adventure Game")
