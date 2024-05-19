@@ -31,20 +31,14 @@ rooms = {
 
 def render_game():
     global game_state
-    st.markdown(f"### {game_state['message']}")
-    if game_state['current_room'] in rooms:
-        description = rooms[game_state['current_room']]['description']
-        st.write(description)
-        for choice, description in rooms[game_state['current_room']]['choices'].items():
-            if st.button(description):
-                if choice in rooms[game_state['current_room']]['choices']:
-                    game_state['current_room'] = choice
-                    game_state['message'] = rooms[game_state['current_room']]['description']
-                    st.write(game_state['message'])
-        for choice, description in rooms[game_state['current_room']]['choices'].items():
-            st.button(description)
-    
-            
+    st.write(f"### {game_state['message']}")
+    for choice, description in rooms[game_state['current_room']]['choices'].items():
+        if st.button(description):
+            if choice in rooms[game_state['current_room']]['choices']:
+                game_state['current_room'] = choice
+                game_state['message'] = rooms[game_state['current_room']]['description']
+            else:
+                game_state['message'] = 'Invalid choice!'
 
 def main():
     st.title("Text Adventure Game")
