@@ -1,60 +1,30 @@
 import streamlit as st
+import openai
 
-# Define the initial game state
-game_state = {
-    'current_room': 'start',
-    'message': 'Welcome to the Text Adventure! Choose your path...',
-}
+# Fetching the OpenAI API key from Streamlit secrets
+openai.api_key = st.secrets["openai_api_key"]
 
-# Define the rooms and their descriptions
-rooms = {
-    'start': {
-        'description': 'You are in a dark room. There are two doors in front of you.',
-        'choices': {
-            'left': 'Go left',
-            'right': 'Go right',
-        }
-    },
-    'left': {
-        'description': 'You chose the left door. You find a treasure chest!',
-        'choices': {
-            'start': 'Go back',
-        }
-    },
-    'right': {
-        'description': 'You chose the right door. You encounter a monster!',
-        'choices': {
-            'start': 'Go back',
-        }
-    },
-    'treasure_room': {
-        'description': 'You found the treasure room! There are gold coins everywhere.',
-        'choices': {
-            'start': 'Go back',
-        }
-    },
-    'monster_room': {
-        'description': 'You entered the monster room. A giant spider is blocking your way!',
-        'choices': {
-            'start': 'Go back',
-        }
-    },
-}
-
-def render_game():
-    global game_state
-    st.markdown(f"### {game_state['message']}")
-    for choice, description in rooms[game_state['current_room']]['choices'].items():
-        if st.button(description):
-            if choice in rooms[game_state['current_room']]['choices']:
-                game_state['current_room'] = choice
-                game_state['message'] = rooms[game_state['current_room']]['description']
-            else:
-                game_state['message'] = 'Invalid choice!'
+def generate_text(prompt, max_tokens=50, temperature=0.7):
+    response = openai.Completion.create(
+      engine="text-davinci-003",
+      prompt=prompt,
+      max_tokens=max_tokens,
+      temperature=temperature,
+    )
+    return response.choices[0].text.strip()
 
 def main():
-    st.title("Text Adventure Game")
-    render_game()
+    st.title("Generative AI Text Generation")
 
-if __name__ == '__main__':
+    prompt = st.text_area("Enter a prompt:", "Once upon a time")
+
+    max_tokens = st.slider("Max Tokens (length of generated text)", min_value=20, max_value=200, value=50, step=10)
+    temperature = st.slider("Temperature (creativity of the AI)", min_value=0.1, max_value=1.0, value=0.7, step=0.1)
+
+    if st.button("Generate"):
+        with st.spinner("Generating..."):
+            generated_text = generate_text(prompt, max_tokens=max_tokens, temperature=temperature)
+            st.text_area("Generated Text:", generated_text, height=300)
+
+if __name__ == "__main__":
     main()
