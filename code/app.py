@@ -31,7 +31,6 @@ rooms = {
 
 def render_game():
     global game_state
-    st.write(f"### {game_state['message']}")
     for choice, description in rooms[game_state['current_room']]['choices'].items():
         if st.button(description):
             if choice in rooms[game_state['current_room']]['choices']:
@@ -39,7 +38,7 @@ def render_game():
                 game_state['message'] = rooms[game_state['current_room']]['description']
             else:
                 game_state['message'] = 'Invalid choice!'
-    st.write(game_state['message'])
+    st.write(f"### {game_state['message']}")
 
 def main():
     st.title("Text Adventure Game")
