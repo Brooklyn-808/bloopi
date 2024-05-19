@@ -14,14 +14,11 @@ def contact():
     st.write("- LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/)")
     st.write("- GitHub: [Your GitHub Profile](https://github.com/)")
 
-def main():
-    st.sidebar.write("Navigation")
-    st.sidebar.page_link("app.py")
-    st.sidebar.page_link("pages/about.py")
-    st.sidebar.page_link("pages/contact.py")
-    st.title("Welcome to My Portfolio!")
-    st.write("This is the home page of my portfolio website.")
-    st.write("Feel free to browse around and learn more about me.")
+st.sidebar.write("Navigation")
+st.sidebar.page_link("app.py")
+st.sidebar.page_link("pages/about.py")
+st.sidebar.page_link("pages/contact.py")
+st.title("Welcome to My Portfolio!")
+st.write("This is the home page of my portfolio website.")
+st.write("Feel free to browse around and learn more about me.")
 
-if __name__ == "__main__":
-    main()
