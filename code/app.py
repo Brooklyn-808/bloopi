@@ -37,8 +37,7 @@ def render_game():
             if choice in rooms[game_state['current_room']]['choices']:
                 game_state['current_room'] = choice
                 game_state['message'] = rooms[game_state['current_room']]['description']
-            else:
-                game_state['message'] = 'Invalid choice!'
+                st.experimental_rerun()  # This line forces Streamlit to rerun the script
 
 def main():
     st.title("Text Adventure Game")
@@ -46,4 +45,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
