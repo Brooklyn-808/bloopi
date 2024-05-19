@@ -1,9 +1,7 @@
 import streamlit as st
 
 def home():
-    st.title("Welcome to My Portfolio!")
-    st.write("This is the home page of my portfolio website.")
-    st.write("Feel free to browse around and learn more about me.")
+    
 
 def about():
     st.title("About Me")
@@ -18,15 +16,13 @@ def contact():
     st.write("- GitHub: [Your GitHub Profile](https://github.com/)")
 
 def main():
-    st.sidebar.title("Navigation")
-    selection = st.sidebar.radio("Go to", ["Home", "About", "Contact"])
-
-    if selection == "Home":
-        home()
-    elif selection == "About":
-        about()
-    elif selection == "Contact":
-        contact()
+    st.sidebar.write("Navigation")
+    st.sidebar.page_link("app.py")
+    st.sidebar.page_link("pages/about.py")
+    st.sidebar.page_link("pages/contact.py")
+    st.title("Welcome to My Portfolio!")
+    st.write("This is the home page of my portfolio website.")
+    st.write("Feel free to browse around and learn more about me.")
 
 if __name__ == "__main__":
     main()
