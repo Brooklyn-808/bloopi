@@ -1,29 +1,24 @@
 import streamlit as st
-import openai
+import gpt_2_simple as gpt2
 
-# Fetching the OpenAI API key from Streamlit secrets
-openai.api_key = st.secrets["openai_api_key"]
+# Download the GPT-2 model (this only needs to be done once)
+gpt2.download_gpt2(model_name="124M")
 
-def generate_text(prompt, max_tokens=50, temperature=0.7):
-    response = openai.Completion.create(
-      engine="text-davinci-003",
-      prompt=prompt,
-      max_tokens=max_tokens,
-      temperature=temperature,
-    )
-    return response.choices[0].text.strip()
+# Function to generate text using GPT-2
+def generate_text(prompt):
+    sess = gpt2.start_tf_sess()
+    gpt2.load_gpt2(sess)
+    generated_text = gpt2.generate(sess, prefix=prompt, return_as_list=True)[0]
+    return generated_text
 
 def main():
     st.title("Generative AI Text Generation")
 
     prompt = st.text_area("Enter a prompt:", "Once upon a time")
 
-    max_tokens = st.slider("Max Tokens (length of generated text)", min_value=20, max_value=200, value=50, step=10)
-    temperature = st.slider("Temperature (creativity of the AI)", min_value=0.1, max_value=1.0, value=0.7, step=0.1)
-
     if st.button("Generate"):
         with st.spinner("Generating..."):
-            generated_text = generate_text(prompt, max_tokens=max_tokens, temperature=temperature)
+            generated_text = generate_text(prompt)
             st.text_area("Generated Text:", generated_text, height=300)
 
 if __name__ == "__main__":
