@@ -27,6 +27,18 @@ rooms = {
             'start': 'Go back',
         }
     },
+    'treasure_room': {
+        'description': 'You found the treasure room! There are gold coins everywhere.',
+        'choices': {
+            'start': 'Go back',
+        }
+    },
+    'monster_room': {
+        'description': 'You entered the monster room. A giant spider is blocking your way!',
+        'choices': {
+            'start': 'Go back',
+        }
+    },
 }
 
 def render_game():
@@ -38,7 +50,7 @@ def render_game():
                 game_state['message'] = rooms[game_state['current_room']]['description']
             else:
                 game_state['message'] = 'Invalid choice!'
-    st.write(f"### {game_state['message']}")
+    st.markdown(f"### {game_state['message']}")
 
 def main():
     st.title("Text Adventure Game")
