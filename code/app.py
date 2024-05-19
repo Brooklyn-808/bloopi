@@ -1,25 +1,32 @@
 import streamlit as st
-import gpt_2_simple as gpt2
 
-# Download the GPT-2 model (this only needs to be done once)
-gpt2.download_gpt2(model_name="124M")
+def home():
+    st.title("Welcome to My Portfolio!")
+    st.write("This is the home page of my portfolio website.")
+    st.write("Feel free to browse around and learn more about me.")
 
-# Function to generate text using GPT-2
-def generate_text(prompt):
-    sess = gpt2.start_tf_sess()
-    gpt2.load_gpt2(sess)
-    generated_text = gpt2.generate(sess, prefix=prompt, return_as_list=True)[0]
-    return generated_text
+def about():
+    st.title("About Me")
+    st.write("I am a passionate developer who loves creating awesome projects.")
+    st.write("In my free time, I enjoy learning new technologies and building cool stuff.")
+
+def contact():
+    st.title("Contact Me")
+    st.write("Feel free to reach out to me through the following channels:")
+    st.write("- Email: example@example.com")
+    st.write("- LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/)")
+    st.write("- GitHub: [Your GitHub Profile](https://github.com/)")
 
 def main():
-    st.title("Generative AI Text Generation")
+    st.sidebar.title("Navigation")
+    selection = st.sidebar.radio("Go to", ["Home", "About", "Contact"])
 
-    prompt = st.text_area("Enter a prompt:", "Once upon a time")
-
-    if st.button("Generate"):
-        with st.spinner("Generating..."):
-            generated_text = generate_text(prompt)
-            st.text_area("Generated Text:", generated_text, height=300)
+    if selection == "Home":
+        home()
+    elif selection == "About":
+        about()
+    elif selection == "Contact":
+        contact()
 
 if __name__ == "__main__":
     main()
