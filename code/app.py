@@ -1,6 +1,5 @@
 import streamlit as st
 
-def home():
     
 
 def about():
