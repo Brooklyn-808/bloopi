@@ -40,7 +40,6 @@ def render_game():
                 if choice in rooms[game_state['current_room']]['choices']:
                     game_state['current_room'] = choice
                     game_state['message'] = rooms[game_state['current_room']]['description']
-                    st.rerun()  # This line forces Streamlit to rerun the script
 
 def main():
     st.title("Text Adventure Game")
