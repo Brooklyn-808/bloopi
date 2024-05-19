@@ -34,13 +34,13 @@ def render_game():
     st.markdown(f"### {game_state['message']}")
     if game_state['current_room'] in rooms:
         description = rooms[game_state['current_room']]['description']
-        st.write_stream(description)
+        st.write(description)
         for choice, description in rooms[game_state['current_room']]['choices'].items():
             if st.button(description):
                 if choice in rooms[game_state['current_room']]['choices']:
                     game_state['current_room'] = choice
                     game_state['message'] = rooms[game_state['current_room']]['description']
-                    st.write_stream(game_state['message'])
+                    st.write(game_state['message'])
 
 def main():
     st.title("Text Adventure Game")
